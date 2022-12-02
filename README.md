@@ -7,3 +7,4 @@ umount /mnt
 ```
 https://pawitp.medium.com/notes-on-exfat-and-reliability-d2f194d394c2
 https://learn.microsoft.com/en-gb/windows/win32/fileio/exfat-specification
+https://uta.service-now.com/selfservice?id=ss_kb_article&sys_id=KB0011414
