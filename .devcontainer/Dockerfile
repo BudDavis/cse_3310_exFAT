@@ -1,2 +1,3 @@
-RUN sudo apt-get install exfat-fuse exfat-utils
+ 
+RUN sudo apt-get update && apt-get install exfat-fuse exfat-utils
 
