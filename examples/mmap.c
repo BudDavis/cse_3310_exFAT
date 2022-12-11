@@ -30,6 +30,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -37,28 +38,63 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
+#include "../include/disk_defs.h"
+
 int main(int argc, char *argv[])
 {
    // open the file system image file
    int fd = open("test.image", O_RDWR);
+   if (perror)
+   {
+      perror("file open: ");
+      exit(0);
+   }
+
    printf("file descriptor = %d\n", fd);
    assert(fd > 0);
 
    // mmap it
+   int len = sizeof(Main_Boot);
    void *p = mmap(NULL,
-                  0,
-                  PROT_NONE,
-                  0,
+                  len,
+                  PROT_READ,
+                  MAP_PRIVATE,
                   fd,
                   0);
+
    assert(p);
+   if (p == (void *)-1)
+   {
+      perror("error from mmap:");
+      exit(0);
+   }
+
+   // Take the pointer returned from mmap() and turn it into
+   // a structure that understands the layout
+
+   Main_Boot *MB = (Main_Boot *)p;
 
    // print out some things we care about
 
-   printf("hello\n");
+   printf("%p %p  \n", MB, p);
+
+   printf("The file system name is %s\n", MB->FileSystemName);
+
+
+   // unmap the file
+   int unMapStat = munmap(p, len);
+   if (unMapStat == -1)
+   {
+      perror("error from unmap:");
+      exit(0);
+   }
+
+   // close the file
    int closeStat = close(fd);
    if (closeStat)
       perror("closeStat");
    fd = 0;
+
+   
    return 0;
 }

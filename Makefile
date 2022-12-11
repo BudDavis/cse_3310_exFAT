@@ -1,5 +1,7 @@
-CPPFLAGS=-Wall -std=c99 -O0 -g
+CPPFLAGS=-Wall -O2 -std=c99 -g 
+CPPINCS=-I./include
+CC=gcc
 mmap:examples/mmap.c
-	${CC} -o $@ $^ 
+	${CC} ${CPPFLAGS} ${CPPINCS} -o $@ $^
 clean:
 	-rm -f mmap
