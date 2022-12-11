@@ -40,11 +40,11 @@
 
 int main(int argc, char *argv[])
 {
-
+    assert(0);
     // open the file system image file
     int fd = open("test.image",O_RDWR);
     printf("file descriptor = %d\n",fd);
-    assert(fd);
+    assert(fd>0);
     
     // mmap it
     void *p = mmap(NULL,

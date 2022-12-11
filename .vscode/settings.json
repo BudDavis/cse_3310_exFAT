@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/workspaces/cse_3310_exFAT",
+            "binaryPath": "/workspaces/cse_3310_exFAT/mmap",
+            "binaryArgs": []
+        }
+    ]
+}
