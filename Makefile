@@ -14,7 +14,7 @@
 
 INCLUDES=./include/disk_defs.h
 
-CPPFLAGS=-Wall -Wextra -O2 -std=c99 -g3 
+CPPFLAGS=-Wall -Wextra -O2 -std=c17 -g3 
 CPPINCS=-I./include
 
 
