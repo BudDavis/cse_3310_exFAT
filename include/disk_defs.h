@@ -8,7 +8,7 @@ extern "C"
 
     // For the details, please refer to
 
-    // https://learn.microsoft.com/en-gb/windows/win32/fileio/exfat-specification
+    //            https://learn.microsoft.com/en-gb/windows/win32/fileio/exfat-specification
 
     typedef struct
     {
