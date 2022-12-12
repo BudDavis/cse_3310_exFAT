@@ -24,6 +24,8 @@ all:mmap fread unit_tests
 # unit tests
 unit_tests: munit_example
 
+# this test needs to be deleted once we get some real tests
+# for the problem at hand
 munit_example:unit_tests/munit/example.c
 	${CC} ${CPPFLAGS}  unit_tests/munit/munit.c -I./unit_tests/munit/ ${CPPINCS} -o $@ $^
 
@@ -39,6 +41,15 @@ mmap:examples/mmap.c
 
 fread:examples/fread.c  
 	${CC} ${CPPFLAGS} ${CPPINCS} -o $@ $^
+
+# run tests
+tests: run_unit_tests run_tests
+
+run_unit_tests: munit_example
+	./munit_example
+
+run_tests:
+	echo "here i would be running the requirements tests"
 
 clean:
 	-rm -f mmap fread munit_example
