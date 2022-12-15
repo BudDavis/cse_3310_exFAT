@@ -40,7 +40,7 @@
 
 #include "../include/disk_defs.h"
 
-//int main(int argc, char *argv[])
+// int main(int argc, char *argv[])
 int main()
 {
    // open the file system image file
@@ -54,48 +54,41 @@ int main()
    printf("file descriptor = %d\n", fd);
    assert(fd > 0);
 
-   // mmap it
-   int len = sizeof(Main_Boot);
-   void *p = mmap(NULL,
-                  len,
-                  PROT_READ,
-                  MAP_PRIVATE,
-                  fd,
-                  0);
+   // Take the pointer returned from mmap() and turn it into
+   // a structure that understands the layout
+   Main_Boot *MB = mmap(NULL,
+                        sizeof(Main_Boot),
+                        PROT_READ,
+                        MAP_PRIVATE,
+                        fd,
+                        0);
 
-   assert(p);
-   if (p == (void *)-1)
+   assert(MB);
+   if (MB == (Main_Boot *)-1)
    {
       perror("error from mmap:");
       exit(0);
    }
 
-   // Take the pointer returned from mmap() and turn it into
-   // a structure that understands the layout
-
-   Main_Boot *MB = (Main_Boot *)p;
-
    // print out some things we care about
 
-   printf("%p %p  \n", MB, p);
+   printf("%p  \n", MB);
 
    printf("The file system name is %s\n", MB->FileSystemName);
 
-
    // unmap the file
-   int unMapStat = munmap(p, len);
-   if (unMapStat == -1)
+   if (munmap(MB, sizeof(Main_Boot)) == -1)
    {
       perror("error from unmap:");
       exit(0);
    }
 
    // close the file
-   int closeStat = close(fd);
-   if (closeStat)
-      perror("closeStat");
+   if (close(fd))
+   {
+      perror("closeStat:");
+   }
    fd = 0;
-
 
    return 0;
 }
