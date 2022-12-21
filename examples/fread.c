@@ -40,7 +40,6 @@
 
 #include "extfat.h"
 
-//int main(int argc, char *argv[])
 int main()
 {
    // open the file system image file
@@ -51,51 +50,49 @@ int main()
       exit(0);
    }
 
-   printf("file descriptor = %d\n", fd);
-   assert(fd > 0);
+   // Take the pointer returned from mmap() and turn it into
+   // a structure that understands the layout of the data
+   Main_Boot *MB = (Main_Boot *)mmap(NULL,
+                                     sizeof(Main_Boot),
+                                     PROT_READ,
+                                     MAP_PRIVATE,
+                                     fd,
+                                     0); // note the offset
 
-   // mmap it
-   int len = sizeof(Main_Boot);
-   void *p = mmap(NULL,
-                  len,
-                  PROT_READ,
-                  MAP_PRIVATE,
-                  fd,
-                  0);
-
-   assert(p);
-   if (p == (void *)-1)
+   if (MB == (Main_Boot *)-1)
    {
       perror("error from mmap:");
       exit(0);
    }
 
-   // Take the pointer returned from mmap() and turn it into
-   // a structure that understands the layout
-
-   Main_Boot *MB = (Main_Boot *)p;
-
    // print out some things we care about
 
-   printf("%p %p  \n", MB, p);
+   printf("the pointer to MB is %p  \n", MB);
 
-   printf("The file system name is %s\n", MB->FileSystemName);
-
+   printf("JumpBoot  %d %d %d \n", MB->JumpBoot[0], MB->JumpBoot[1], MB->JumpBoot[2]);
+   printf("FileSystemName %s\n", MB->FileSystemName); // warning, not required to be terminated
+   printf("PartitionOffset %ld\n", MB->PartitionOffset);
+   printf("VolumeLength %ld\n", MB->VolumeLength);
+   printf("FatOffset %d\n", MB->FatOffset);
+   printf("FatLength %d\n", MB->FatLength);
+   printf("ClusterHeapOffset %d\n", MB->ClusterHeapOffset);
+   printf("ClusterCount %d\n", MB->ClusterCount);
+   printf("FirstClusterofRootDirectory %d\n", MB->FirstClusterOfRootDirectory);
+   printf("VolumeSerialNumber %d\n", MB->VolumeSerialNumber);
 
    // unmap the file
-   int unMapStat = munmap(p, len);
-   if (unMapStat == -1)
+   if (munmap(MB, sizeof(Main_Boot)) == -1)
    {
       perror("error from unmap:");
       exit(0);
    }
 
    // close the file
-   int closeStat = close(fd);
-   if (closeStat)
-      perror("closeStat");
+   if (close(fd))
+   {
+      perror("closeStat:");
+   }
    fd = 0;
-
 
    return 0;
 }
