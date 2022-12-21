@@ -38,9 +38,8 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
-#include "disk_defs.h"
+#include "extfat.h"
 
-// int main(int argc, char *argv[])
 int main()
 {
    // open the file system image file

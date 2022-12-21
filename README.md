@@ -17,6 +17,10 @@ https://uta.service-now.com/selfservice?id=ss_kb_article&sys_id=KB0011414
 https://nemequ.github.io/munit/#download
 
 
+https://www.gnu.org/software/libc/manual/html_node/Example-of-Getopt.html
+
+
+
 
 Plan:
 

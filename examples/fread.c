@@ -38,7 +38,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
-#include "../include/disk_defs.h"
+#include "extfat.h"
 
 //int main(int argc, char *argv[])
 int main()
