@@ -50,19 +50,15 @@ int main()
       exit(0);
    }
 
-   printf("file descriptor = %d\n", fd);
-   assert(fd > 0);
-
    // Take the pointer returned from mmap() and turn it into
-   // a structure that understands the layout
-   Main_Boot *MB = mmap(NULL,
-                        sizeof(Main_Boot),
-                        PROT_READ,
-                        MAP_PRIVATE,
-                        fd,
-                        0);
+   // a structure that understands the layout of the data
+   Main_Boot *MB = (Main_Boot *)mmap(NULL,
+                                     sizeof(Main_Boot),
+                                     PROT_READ,
+                                     MAP_PRIVATE,
+                                     fd,
+                                     0); // note the offset
 
-   assert(MB);
    if (MB == (Main_Boot *)-1)
    {
       perror("error from mmap:");
@@ -71,9 +67,18 @@ int main()
 
    // print out some things we care about
 
-   printf("%p  \n", MB);
+   printf("the pointer to MB is %p  \n", MB);
 
-   printf("The file system name is %s\n", MB->FileSystemName);
+   printf("JumpBoot  %d %d %d \n", MB->JumpBoot[0], MB->JumpBoot[1], MB->JumpBoot[2]);
+   printf("FileSystemName %s\n", MB->FileSystemName); // warning, not required to be terminated
+   printf("PartitionOffset %ld\n", MB->PartitionOffset);
+   printf("VolumeLength %ld\n", MB->VolumeLength);
+   printf("FatOffset %d\n", MB->FatOffset);
+   printf("FatLength %d\n", MB->FatLength);
+   printf("ClusterHeapOffset %d\n", MB->ClusterHeapOffset);
+   printf("ClusterCount %d\n", MB->ClusterCount);
+   printf("FirstClusterofRootDirectory %d\n", MB->FirstClusterOfRootDirectory);
+   printf("VolumeSerialNumber %d\n", MB->VolumeSerialNumber);
 
    // unmap the file
    if (munmap(MB, sizeof(Main_Boot)) == -1)

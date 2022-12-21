@@ -15,6 +15,15 @@ extern "C"
         char JumpBoot[3];
         char FileSystemName[8];
         char MustBeZero[53];
+        long int PartitionOffset;
+        long int VolumeLength;
+        int FatOffset;
+        int FatLength;
+        int ClusterHeapOffset;
+        int ClusterCount;
+        int FirstClusterOfRootDirectory;
+        int VolumeSerialNumber;
+
     } Main_Boot;
 
 #ifdef __cplusplus
