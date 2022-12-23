@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <stddef.h>
 
 #include "extfat.h"
 
@@ -79,8 +80,14 @@ int main()
    printf("ClusterCount %d\n", MB->ClusterCount);
    printf("FirstClusterofRootDirectory %d\n", MB->FirstClusterOfRootDirectory);
    printf("VolumeSerialNumber %x\n", MB->VolumeSerialNumber);
-   printf("PercentInUse %d\n",MB->PercentInUse);
+   printf("PercentInUse %d\n", MB->PercentInUse);
+   printf("the offset of PerCentInUse %ld\n", offsetof(Main_Boot, PercentInUse));
 
+   // check that the offsets match the documentation
+   assert(offsetof(Main_Boot, PercentInUse) == 112);
+
+
+   
    // unmap the file
    if (munmap(MB, sizeof(Main_Boot)) == -1)
    {
