@@ -23,8 +23,19 @@ extern "C"
         int ClusterCount;
         int FirstClusterOfRootDirectory;
         int VolumeSerialNumber;
-
+        short int FileSystemRevision;
+        short int VolumeFlags;
+        unsigned char BytesPerSectorShift;
+        unsigned char SectorsPerClusterShift;
+        unsigned char NumberOfFats;
+        unsigned char DriveSelect;
+        unsigned char PercentInUse;
+        unsigned char Reserved[7];
+        unsigned char BootCode[390];
+        short int BootSignature;
+        unsigned char ExcessSpace;
     } Main_Boot;
+  
 
 #ifdef __cplusplus
     extern "C"

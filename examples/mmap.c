@@ -78,7 +78,8 @@ int main()
    printf("ClusterHeapOffset %d\n", MB->ClusterHeapOffset);
    printf("ClusterCount %d\n", MB->ClusterCount);
    printf("FirstClusterofRootDirectory %d\n", MB->FirstClusterOfRootDirectory);
-   printf("VolumeSerialNumber %d\n", MB->VolumeSerialNumber);
+   printf("VolumeSerialNumber %x\n", MB->VolumeSerialNumber);
+   printf("PercentInUse %d\n",MB->PercentInUse);
 
    // unmap the file
    if (munmap(MB, sizeof(Main_Boot)) == -1)

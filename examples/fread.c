@@ -1,6 +1,6 @@
 /*
 
-   This is an example of using mmap to read an extFAT image file.
+   This is an example of using lseek / fread to read an extFAT image file.
 
    To make the sample file:
 
@@ -50,6 +50,10 @@ int main()
       exit(0);
    }
 
+
+
+
+#if 0
    // Take the pointer returned from mmap() and turn it into
    // a structure that understands the layout of the data
    Main_Boot *MB = (Main_Boot *)mmap(NULL,
@@ -86,7 +90,8 @@ int main()
       perror("error from unmap:");
       exit(0);
    }
-
+   
+#endif
    // close the file
    if (close(fd))
    {
