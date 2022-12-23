@@ -18,7 +18,11 @@ CPPFLAGS=-Wall -Wextra -O2 -std=c17 -g3
 CPPINCS=-I./include
 
 
-all:mmap fread unit_tests
+all:mmap fread unit_tests extfat
+
+# the utility that is a focus of this project
+extfat:src/extfat.c
+	${CC} ${CPPFLAGS} ${CPPINCS} -o $@ $^
 
 
 # unit tests
@@ -52,5 +56,5 @@ run_tests:
 	echo "here i would be running the requirements tests"
 
 clean:
-	-rm -f mmap fread munit_example
+	-rm -f mmap fread munit_example extfat
 
