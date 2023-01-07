@@ -29,4 +29,8 @@ https://www.gnu.org/software/libc/manual/html_node/Example-of-Getopt.html
 https://www.freecodecamp.org/news/how-to-use-git-and-github-in-a-team-like-a-pro/
 
 
+https://en.wikipedia.org/wiki/ExFAT
+
+
+
  
