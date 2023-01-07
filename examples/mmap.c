@@ -81,10 +81,11 @@ int main()
    printf("FirstClusterofRootDirectory %d\n", MB->FirstClusterOfRootDirectory);
    printf("VolumeSerialNumber %x\n", MB->VolumeSerialNumber);
    printf("PercentInUse %d\n", MB->PercentInUse);
-   printf("the offset of PerCentInUse %ld\n", offsetof(Main_Boot, PercentInUse));
+   
 
    // check that the offsets match the documentation
    assert(offsetof(Main_Boot, PercentInUse) == 112);
+   //printf("the offset of PerCentInUse %ld\n", offsetof(Main_Boot, PercentInUse));
 
 
    

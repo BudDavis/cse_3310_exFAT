@@ -6,6 +6,8 @@ extern "C"
 {
 #endif
 
+    // This header defines the layout of data on an extfat disk image.
+    
     // For the details, please refer to
 
     //            https://learn.microsoft.com/en-gb/windows/win32/fileio/exfat-specification

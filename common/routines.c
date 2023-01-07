@@ -1,4 +1,9 @@
+#include "routines.h"
+#pragma once
+
 // from https://learn.microsoft.com/en-gb/windows/win32/fileio/exfat-specification
+
+
 UInt32 BootChecksum
 (
     UCHAR  * Sectors,        // points to an in-memory copy of the 11 sectors
